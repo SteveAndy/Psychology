@@ -1,0 +1,13 @@
+<view class="top bg-gradual-blue">
+    <view class="text padding">
+        <view class="text-lg padding">{{status==1?'审核中':'审核失败'}}</view>
+        <view class="padding mtext">{{msg}}</view>
+    </view>
+    <view class="wave">
+        <image src='{{wave}}' mode='scaleToFill' class='gif-black response'></image>
+    </view>
+</view>
+<view class="img padding">
+    <image src="/images/{{status==1?'wait':'fail'}}.png" mode="widthFix" />
+</view>
+<include src='../../../dist/copyright/copyright.wxml' />

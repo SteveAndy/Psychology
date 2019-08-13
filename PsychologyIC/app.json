@@ -1,0 +1,73 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/expert/index",
+    "pages/user/editInfo",
+    "pages/user/user",
+    "pages/user/auth",
+    "pages/forum/forum",
+    "pages/forum/special",
+    "pages/forum/info/index",
+    "pages/release/index",
+    "pages/chat/chat",
+    "pages/chat/chatUI/index",
+    "pages/information/index",
+    "pages/information/info/index",
+    "pages/feedback/index",
+    "pages/webview/webview"
+  ],
+  "requiredBackgroundModes": [
+    "audio"
+  ],
+  "navigateToMiniProgramAppIdList":[
+    "wx5eeb75297d5f39f6"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "宁夏心理咨询",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#47505b",
+    "selectedColor": "#00d853",
+    "backgroundColor": "#FFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "iconPath": "images/tabBar/shouye.png",
+        "selectedIconPath": "images/tabBar/shouye_i.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "images/tabBar/zhuanjia.png",
+        "selectedIconPath": "images/tabBar/zhuanjia_i.png",
+        "pagePath": "pages/expert/index",
+        "text": "专家"
+      },
+      {
+        "iconPath": "images/tabBar/message.png",
+        "selectedIconPath": "images/tabBar/message_i.png",
+        "pagePath": "pages/forum/forum",
+        "text": "问答"
+      },
+      {
+        "iconPath": "images/tabBar/message.png",
+        "selectedIconPath": "images/tabBar/message_i.png",
+        "pagePath": "pages/chat/chat",
+        "text": "消息"
+      },
+      {
+        "iconPath": "images/tabBar/wode.png",
+        "selectedIconPath": "images/tabBar/wode_i.png",
+        "pagePath": "pages/user/user",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

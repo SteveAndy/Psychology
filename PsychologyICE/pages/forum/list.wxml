@@ -1,0 +1,41 @@
+<block wx:if="{{new_list=='ErrorNetwork'}}">
+    <view class="ErrorNetwork" style="padding-top:250rpx;">
+        <image src="/images/ErrorNetwork.png" mode="widthFix" style='width:60%' />
+        <view class="text-bold text-gray" style="letter-spacing:6rpx;line-height:50rpx;font-size:26rpx">
+            网络错误
+        </view>
+    </view>
+</block>
+<block wx:if="{{!new_list&&new_list!='ErrorNetwork'}}">
+    <view class="ErrorNetwork" style="padding-top:250rpx;">
+        <image src="/images/NotAvailable.png" mode="widthFix" style='width:60%' />
+        <view class="text-bold text-gray" style="letter-spacing:6rpx;line-height:50rpx;font-size:26rpx">
+            暂无帖子
+        </view>
+    </view>
+</block>
+<block wx:if="{{new_list&&new_list!='ErrorNetwork'}}">
+    <navigator url="info/index?id={{i.id}}" class="cu-card dynamic" wx:for="{{new_list}}" wx:for-item="i" hover-class="Ghover">
+        <view class="cu-item Gshadow-a" style="border-radius:0">
+            <view class="cu-list menu menu-avatar">
+                <view class="cu-item">
+                    <view class="cu-avatar round lg" style="background-image:url({{i.icon}});"></view>
+                    <view class='content flex-sub'>
+                        <view>{{i.name}}</view>
+                        <view class='text-gray text-sm flex justify-between'>{{i.time}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class='text-content' style="margin-bottom:0rpx">{{i.content}}</view>
+            <view class="justify-between flex text-gray text-sm padding align-center">
+                <view>
+                    <text class="icon-attentionfill" />
+                    {{i.see}}
+                    <text class="icon-messagefill" />
+                    {{i.message_num}}
+                </view>
+                <view style="background-color:rgba(0,0,0,0.05);padding:15rpx;">回复</view>
+            </view>
+        </view>
+    </navigator>
+</block>

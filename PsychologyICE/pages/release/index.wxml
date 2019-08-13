@@ -1,0 +1,72 @@
+<!-- 顶部栏 -->
+<view class="bg-white a-fixed">
+  <view class='cu-bar text-black' style="justify-content:left !important;height:{{CustomBar}}px;background-color:transparent">
+    <navigator id="toback" class='action' open-type="navigateBack" delta="1" hover-class="none" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+      <text class='icon-back'></text>
+      返回
+    </navigator>
+    <view class='action' bind:tap="doubleClick" style="height:{{CustomBar}}px;padding:{{StatusBar}}px 0 0 5px;font-size:30rpx;">
+      <view class="text-center" style='padding-left:{{titleMarginLeft}}px;width:{{titleWidth}}px;'>
+        {{indexTitle}}
+      </view>
+    </view>
+  </view>
+</view>
+<form bindsubmit="sendCommunity">
+  <view class="cu-card case no-card" style="padding-top:{{CustomBar}}px">
+    <view class="cu-item">
+      <!-- 资讯标题 -->
+      <view class="cu-form-group">
+        <view class="title">资讯标题</view>
+        <input name='title' placeholder="请输入资讯标题" value="{{title}}"></input>
+      </view>
+      <!-- 资讯分类 -->
+      <view class="cu-form-group">
+        <view class="title">资讯分类</view>
+        <picker name='field' bindchange="Change" bindcolumnchange="ColumnChange" value="{{dataIndex}}" range="{{dataArray}}">
+          <view class="picker text-blue">{{dataArray[dataIndex]}}</view>
+        </picker>
+      </view>
+    </view>
+    <!-- 资讯图片 -->
+    <view class="cu-bar bg-white solid-bottom margin-top">
+      <view class="action">
+        <text class="icon-title text-blue"></text>
+        资讯图片
+      </view>
+    </view>
+    <view class="cu-form-group" style="padding:0 0rpx">
+      <view class="info margin shadow">
+        <view class="bg-img img" style="background-image:url({{img[0]}})" wx:if="{{img[0]}}" bindtap="ViewImage">
+          <view class="cu-tag bg-red" catchtap="DelImg">
+            <text class="icon-close"></text>
+          </view>
+        </view>
+        <view class="img img2" bindtap="ChooseImage" wx:else>
+          <text class="icon-cameraadd"></text>
+        </view>
+      </view>
+    </view>
+    <!-- 资讯内容 -->
+    <view class="cu-bar bg-white solid-bottom margin-top">
+      <view class="action">
+        <text class="icon-title text-blue"></text>
+        资讯内容
+      </view>
+      <view class="action text-sm">
+        已输入
+        <view class="text-blue">{{cursor}}</view>
+        字
+      </view>
+    </view>
+    <view class="cu-form-group">
+      <textarea name='textarea' value="{{content}}" bindinput="textarea" placeholder="请输入咨询内容,最少输入30字" maxlength="-1" style="height:600rpx"></textarea>
+    </view>
+  </view>
+  <!-- 提交按钮 -->
+  <view class="cu-bar btn-group" style='padding:15rpx 0;width:100%'>
+    <button bindtap='updataUserInfo' form-type="submit" class='cu-btn bg-blue shadow-blur round'>
+      提交发布
+    </button>
+  </view>
+</form>

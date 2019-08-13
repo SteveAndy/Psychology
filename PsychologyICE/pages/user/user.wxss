@@ -1,0 +1,33 @@
+page {
+	background-color: #FFF;
+}
+
+.user-icon {
+	width: 100%;
+	top: 20rpx;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.wave{
+  width:100%;
+  display:flex;
+  position: absolute;
+  bottom: 0rpx;
+}
+
+.badge1 {
+  border-radius: 200rpx;
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  font-size: 20rpx;
+  padding: 0rpx 10rpx;
+  height: 28rpx;
+  color: #fff;
+}
+
+.transparent{
+	background-color: rgba(255, 255, 255, 0.20) !important;
+}

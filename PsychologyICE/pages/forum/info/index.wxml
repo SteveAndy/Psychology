@@ -1,0 +1,86 @@
+<!-- 顶部栏 -->
+<view class="bg-white a-fixed shadow">
+    <view class='cu-bar text-block shadow' style="justify-content:left !important;height:{{CustomBar}}px;background-color:transparent">
+        <navigator id="toback" class='action' open-type="navigateBack" delta="1" hover-class="none" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+            <text class='icon-back'></text>
+            返回
+        </navigator>
+        <view class='action' bind:tap="doubleClick" style="height:{{CustomBar}}px;padding:{{StatusBar}}px 0 0 5px;font-size:30rpx;">
+            <view class="text-center" style='padding-left:{{titleMarginLeft}}px;width:{{titleWidth}}px;'>
+                {{indexTitle}}
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 加载中 -->
+<block wx:if="{{!CommunityInfo&&CommunityInfo!='ErrorNetwork'}}">
+    <view class="ErrorNetwork" style="height:{{ViewHeight}}px;padding-top:{{CustomBar}}px">
+        <image mode="widthFix" style="width:50%;" src="{{loadingImg}}"/>
+        <view class='text-grey text-center'>正在加载</view>
+    </view>
+</block>
+<block wx:if="{{CommunityInfo=='ErrorNetwork'}}">
+    <view class="padding-xl ErrorNetwork" style="height:{{ViewHeight}}px;padding-top:{{CustomBar}}px">
+        <image src="/images/ErrorNetwork.png" mode="widthFix" style='width:60%' />
+        <view class="text-bold text-gray" style="letter-spacing:6rpx;line-height:50rpx;font-size:26rpx">
+            请求错误
+        </view>
+    </view>
+</block>
+<!-- 帖子详情 -->
+<block wx:if="{{CommunityInfo.content}}">
+    <scroll-view scroll-y scroll-with-animation scroll-top='{{scrollTop}}' style="height:{{ViewHeight}}px;padding:{{CustomBar}}px 0 100rpx 0">
+        <view class="cu-card dynamic no-card">
+            <view class="cu-item" style="border-radius:0">
+                <view class="cu-list menu menu-avatar">
+                    <view class="cu-item">
+                        <view class="cu-avatar round lg" style="background-image:url({{CommunityInfo.icon}});"></view>
+                        <view class='content flex-sub'>
+                            <view>{{CommunityInfo.name}}</view>
+                            <view class='text-gray text-sm flex justify-between'>
+                                {{CommunityInfo.time}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class='text-content' style="margin-bottom:0rpx">
+                    {{CommunityInfo.content}}
+                </view>
+                <view class="text-gray text-sm padding">
+                    <view class="text-right">
+                        <text class="icon-attentionfill" />
+                        {{CommunityInfo.see}}
+                        <text class="icon-messagefill" />
+                        {{CommunityInfo.message_num}}
+                    </view>
+                </view>
+                <view class="cu-list menu-avatar comment reply" wx:if="{{CommunityInfo.message_list}}">
+                    <view class="cu-item" wx:for="{{CommunityInfo.message_list}}" wx:for-item="i">
+                        <view class="cu-avatar round" style="background-image:url({{i.icon}});"/>
+                        <view class="content text-grey">
+                            <view>{{i.name}}</view>
+                            <view class="margin-top-sm" style="font-size:30rpx">{{i.content}}</view>
+                            <view class="margin-top-sm flex justify-between">
+                                <view class="text-sm">{{i.time}}</view>
+                                <view class="text-sm flex" wx:if="{{user_id==i.user_id}}">
+                                    <view class="icon-writefill margin-right-sm text-blue" bind:tap="menu" data-type='updata' data-index='{{index}}'>
+                                        修改
+                                    </view>
+                                    <view class="icon-deletefill text-red" bind:tap="menu" data-type='delete' data-index='{{index}}'>
+                                        删除
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <form bindsubmit="Reply">
+        <view class="cu-bar foot input" style="bottom:{{InputBottom}}px;height:100rpx;">
+            <input name='content' class="solid-bottom" style="font-size:28rpx" bindfocus="InputFocus" adjust-position="{{false}}" value="{{InputValue}}" focus="{{InputValue!=''?true:false}}" placeholder="说点什么吧" bindblur="InputBlur" maxlength="-1" cursor-spacing="10"></input>
+            <button form-type="submit" class="cu-btn text-df bg-blue shadow">回复</button>
+        </view>
+    </form>
+</block>

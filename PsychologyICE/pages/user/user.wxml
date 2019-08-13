@@ -1,0 +1,50 @@
+<view class="bg-gradual-blue" style="height:530rpx;position: relative;">
+  <view class='cu-bar text-block' style="justify-content:left !important;height:{{CustomBar}}px;background-color:transparent">
+    <navigator class='action' open-type="navigateBack" delta="1" hover-class="none" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+      <text class='icon-back'></text>
+      返回
+    </navigator>
+  </view>
+  <view class="padding-lr user-icon">
+    <view class="cu-avatar round lg margin-bottom" style="background-image:url({{iconUrl}});width: 150rpx;height: 150rpx;">
+      <text class="cu-tag badge1 {{gender==2?'icon-female bg-pink':'icon-male bg-blue'}}" style='top: 3rpx;right: 5rpx;font-size:23rpx'></text>
+    </view>
+    <text class="cu-tag radius margin-bottom transparent">{{userName}}</text>
+    <view class="text-sm radius transparent flex" style="background-color: rgba(255,255,255,0.8);padding: 10rpx;">
+      <text class="icon-locationfill lg text-red"></text>
+      <view class="text-white" style="padding-left:5rpx">
+        {{!address||address=='null'?'很懒，没有填写地址':address}}
+      </view>
+    </view>
+  </view>
+  <view class="wave">
+    <image src='{{wave}}' mode='scaleToFill' class='gif-black response' style='height:100rpx;'></image>
+  </view>
+</view>
+<view class="cu-list menu no-padding card-menu margin-bottom-xl margin-top-sm" style='margin-bottom:30rpx'>
+  <view class="cu-item arrow">
+    <view class="content" bind:tap='toPage' data-page='user_editInfo'>
+      <text class="icon-settings text-red text-sm"></text>
+      <text class="text-grey text-sm">修改资料</text>
+    </view>
+  </view>
+  <!-- <view class='cu-item'>
+    <view class="content">
+      <text class="icon-comment text-blue text-sm"></text>
+      <text class="text-grey text-sm">更新日志</text>
+    </view>
+    <view class="action">
+      <view class="cu-tag bg-blue round text-xs">11</view>
+    </view>
+  </view> -->
+  <view class="cu-item arrow">
+    <view class="content" bind:tap="toPage" data-page='feedback'>
+      <text class="icon-write text-yellow text-sm"></text>
+      <text class="text-grey text-sm">意见反馈</text>
+    </view>
+    <view class="action">
+      <text class="text-grey text-xs">反馈意见、遇到的问题</text>
+    </view>
+  </view>
+</view>
+<include src='../../dist/copyright/copyright.wxml' />

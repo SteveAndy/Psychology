@@ -1,0 +1,2043 @@
+swagger: "2.0"
+info:
+  title: beego Test API
+  description: beego has a very cool tools to autogenerate documents for your API
+  version: 1.0.0
+  termsOfService: http://beego.me/
+  contact:
+    email: astaxie@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /v1
+paths:
+  /admin/:
+    get:
+      tags:
+      - admin
+      description: 获取管理员列表
+      operationId: AdminController.获取管理员列表
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Admin'
+        "403":
+          description: ""
+  /admin/{id}:
+    put:
+      tags:
+      - admin
+      description: 更新管理员信息
+      operationId: AdminController.更新管理员信息
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Admin content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Admin'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Admin'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - admin
+      description: 删除管理员
+      operationId: AdminController.删除管理员
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /admin/login:
+    post:
+      tags:
+      - admin
+      description: 若登录成功则返回管理员详细信息
+      operationId: AdminController.管理员登录
+      parameters:
+      - in: formData
+        name: admin_code
+        description: 微信提供的用户身份代码
+        required: true
+        type: string
+      responses:
+        "-1":
+          description: '...'
+        "0":
+          description: '...'
+  /banner/:
+    get:
+      tags:
+      - banner
+      description: 获取所有的banner条
+      operationId: BannerController.获取所有的banner条
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Banner'
+        "403":
+          description: ""
+    post:
+      tags:
+      - banner
+      description: 添加banner条，只需要提交 banner图片的url、类型、超链接即可
+      operationId: BannerController.添加banner条
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Banner content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Banner'
+      responses:
+        "201":
+          description: '{int} models.Banner'
+        "403":
+          description: body is empty
+  /banner/{id}:
+    put:
+      tags:
+      - banner
+      description: 更新banner条
+      operationId: BannerController.更新banner条
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Banner content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Banner'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Banner'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - banner
+      description: 删除banner条
+      operationId: BannerController.删除banner条
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /community/:
+    get:
+      tags:
+      - community
+      description: 获取帖子列表
+      operationId: CommunityController.获取帖子列表
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Community'
+        "403":
+          description: ""
+    post:
+      tags:
+      - community
+      description: 发布帖子，只需要填写 分类ID、内容、作者ID即可
+      operationId: CommunityController.发布帖子
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Community content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Community'
+      responses:
+        "201":
+          description: '{int} models.Community'
+        "403":
+          description: body is empty
+  /community/{id}:
+    get:
+      tags:
+      - community
+      description: 获取帖子详情
+      operationId: CommunityController.获取帖子详情
+      parameters:
+      - in: path
+        name: id
+        description: 帖子ID
+        required: true
+        type: string
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: query
+        name: offset
+        description: 从第几条记录开始查询帖子回复
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Community'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - community
+      description: 更新帖子内容
+      operationId: CommunityController.更新帖子内容
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: 要更新的帖子的ID
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Community content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Community'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Community'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - community
+      description: 删除帖子
+      operationId: CommunityController.删除帖子
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: 要删除的帖子的ID
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /community_class/:
+    get:
+      tags:
+      - community_class
+      description: get CommunityClass
+      operationId: CommunityClassController.Get All
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.CommunityClass'
+        "403":
+          description: ""
+    post:
+      tags:
+      - community_class
+      description: 添加帖主分类，只需要填写分类名字和颜色即可
+      operationId: CommunityClassController.添加帖子分类
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for CommunityClass content
+        required: true
+        schema:
+          $ref: '#/definitions/models.CommunityClass'
+      responses:
+        "201":
+          description: '{int} models.CommunityClass'
+        "403":
+          description: body is empty
+  /community_class/{id}:
+    put:
+      tags:
+      - community_class
+      description: 更新分类
+      operationId: CommunityClassController.更新分类
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for CommunityClass content
+        required: true
+        schema:
+          $ref: '#/definitions/models.CommunityClass'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.CommunityClass'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - community_class
+      description: 删除分类
+      operationId: CommunityClassController.删除分类
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /community_class_sub/:
+    post:
+      tags:
+      - community_class_sub
+      description: 创建子分类，只需要填写标题、图标、父分类ID即可。
+      operationId: CommunityClassSubController.创建子分类
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for CommunityClassSub content
+        required: true
+        schema:
+          $ref: '#/definitions/models.CommunityClassSub'
+      responses:
+        "201":
+          description: '{int} models.CommunityClassSub'
+        "403":
+          description: body is empty
+  /community_class_sub/{id}:
+    put:
+      tags:
+      - community_class_sub
+      description: 更新子分类
+      operationId: CommunityClassSubController.更新子分类
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: 要更新的分类的ID
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for CommunityClassSub content
+        required: true
+        schema:
+          $ref: '#/definitions/models.CommunityClassSub'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.CommunityClassSub'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - community_class_sub
+      description: 删除子分类
+      operationId: CommunityClassSubController.删除子分类
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: 要删除的子分类的ID
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /community_reply/:
+    post:
+      tags:
+      - community_reply
+      description: 添加帖子回复，只需要提交 留言人ID、留言内容 即可
+      operationId: CommunityReplyController.添加帖子回复
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: formData
+        name: Cid
+        description: 回复所属的帖子的ID
+        required: true
+        type: string
+      - in: formData
+        name: UserId
+        description: 添加本回复的用户的ID
+        required: true
+        type: string
+      - in: formData
+        name: Content
+        description: 回复的内容
+        required: true
+        type: string
+      responses:
+        "201":
+          description: '{int} models.CommunityReply'
+        "403":
+          description: body is empty
+  /community_reply/{id}:
+    put:
+      tags:
+      - community_reply
+      description: 更新回复
+      operationId: CommunityReplyController.更新回复
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: 要更新的回复的ID
+        required: true
+        type: string
+      - in: formData
+        name: Cid
+        description: 回复所属的帖子的ID
+        required: true
+        type: string
+      - in: formData
+        name: UserId
+        description: 添加本回复的用户的ID
+        required: true
+        type: string
+      - in: formData
+        name: Content
+        description: 回复的内容
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.CommunityReply'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - community_reply
+      description: 删除回复
+      operationId: CommunityReplyController.删除回复
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: 要删除的回复的ID
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /expert/:
+    get:
+      tags:
+      - expert
+      description: 获取所有专家信息
+      operationId: ExpertController.获取所有专家信息
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Expert'
+        "403":
+          description: ""
+  /expert/{id}:
+    get:
+      tags:
+      - expert
+      description: 获取专家信息
+      operationId: ExpertController.获取专家信息
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Expert'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - expert
+      description: 更新专家信息
+      operationId: ExpertController.更新专家信息
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Expert content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Expert'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Expert'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - expert
+      description: 删除专家
+      operationId: ExpertController.删除专家
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /expert/login:
+    post:
+      tags:
+      - expert
+      description: 若登录成功则返回专家详细信息，失败则返回用户的session_key，方便前端与微信交换用户详细信息
+      operationId: ExpertController.专家登录
+      parameters:
+      - in: formData
+        name: expert_code
+        description: 微信提供的用户身份代码
+        required: true
+        type: string
+      responses:
+        "-1":
+          description: '...'
+        "0":
+          description: '...'
+  /expert_auth/:
+    get:
+      tags:
+      - expert_auth
+      description: 获取所有的专家认证列表
+      operationId: ExpertAuthController.获取所有的专家认证列表
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ExpertAuth'
+        "403":
+          description: ""
+    post:
+      tags:
+      - expert_auth
+      description: 提交认证申请
+      operationId: ExpertAuthController.提交认证申请
+      parameters:
+      - in: query
+        name: login_code
+        description: 登录代码
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: 除时间和ID外所有字段都需要提交，openid字段填写用户code
+        required: true
+        schema:
+          $ref: '#/definitions/models.ExpertAuth'
+      responses:
+        "201":
+          description: '{int} models.ExpertAuth'
+        "403":
+          description: body is empty
+  /expert_auth/{id}:
+    put:
+      tags:
+      - expert_auth
+      description: 审核专家认证申请
+      operationId: ExpertAuthController.审核专家认证申请
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: query
+        name: status
+        description: 是否审核通过，1 通过，0拒绝，若拒绝则需要填写驳回原因
+        required: true
+        type: string
+      - in: query
+        name: reject
+        description: 驳回原因
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ExpertAuth'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - expert_auth
+      description: 删除认证信息
+      operationId: ExpertAuthController.删除认证信息
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /expert_class/:
+    get:
+      tags:
+      - expert_class
+      description: 获取专家分类列表
+      operationId: ExpertClassController.获取专家分类列表
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ExpertClass'
+        "403":
+          description: ""
+    post:
+      tags:
+      - expert_class
+      description: 创建专家分类
+      operationId: ExpertClassController.创建专家分类
+      parameters:
+      - in: body
+        name: body
+        description: body for ExpertClass content
+        required: true
+        schema:
+          $ref: '#/definitions/models.ExpertClass'
+      responses:
+        "201":
+          description: '{int} models.ExpertClass'
+        "403":
+          description: body is empty
+  /expert_class/{id}:
+    put:
+      tags:
+      - expert_class
+      description: 更新专家分类
+      operationId: ExpertClassController.更新专家分类
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for ExpertClass content
+        required: true
+        schema:
+          $ref: '#/definitions/models.ExpertClass'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ExpertClass'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - expert_class
+      description: 删除专家分类
+      operationId: ExpertClassController.删除专家分类
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /info/:
+    get:
+      tags:
+      - info
+      description: 获取资讯列表
+      operationId: InfoController.获取资讯列表
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Info'
+        "403":
+          description: ""
+    post:
+      tags:
+      - info
+      description: 创建文章，只需要填写 资讯列表缩略图、资讯内容、资讯标题、作者类型即可
+      operationId: InfoController.创建文章
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Info content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Info'
+      responses:
+        "201":
+          description: '{int} models.Info'
+        "403":
+          description: body is empty
+  /info/{id}:
+    get:
+      tags:
+      - info
+      description: 获取资讯详情
+      operationId: InfoController.获取资讯详情
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Info'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - info
+      description: 更新资讯
+      operationId: InfoController.更新资讯
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Info content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Info'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Info'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - info
+      description: 删除资讯
+      operationId: InfoController.删除资讯
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /info_class/:
+    get:
+      tags:
+      - info_class
+      description: 获取文章分类列表
+      operationId: InfoClassController.获取文章分类列表
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.InfoClass'
+        "403":
+          description: ""
+    post:
+      tags:
+      - info_class
+      description: 创建文章分类，只需要填写分类名即可
+      operationId: InfoClassController.创建文章分类
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for InfoClass content
+        required: true
+        schema:
+          $ref: '#/definitions/models.InfoClass'
+      responses:
+        "201":
+          description: '{int} models.InfoClass'
+        "403":
+          description: body is empty
+  /info_class/{id}:
+    put:
+      tags:
+      - info_class
+      description: 更新文章分类
+      operationId: InfoClassController.更新文章分类
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for InfoClass content
+        required: true
+        schema:
+          $ref: '#/definitions/models.InfoClass'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.InfoClass'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - info_class
+      description: 删除文章分类
+      operationId: InfoClassController.删除文章分类
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /menu/:
+    get:
+      tags:
+      - menu
+      description: 获取所有的menu条
+      operationId: MenuController.获取所有的menu条
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Menu'
+        "403":
+          description: ""
+    post:
+      tags:
+      - menu
+      description: 添加menu条，只需要提交 menu图片的url、类型、超链接、标题即可
+      operationId: MenuController.添加menu条
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Menu content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Menu'
+      responses:
+        "201":
+          description: '{int} models.Menu'
+        "403":
+          description: body is empty
+  /menu/{id}:
+    put:
+      tags:
+      - menu
+      description: 更新menu条
+      operationId: MenuController.更新menu条
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Menu content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Menu'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Menu'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - menu
+      description: 删除menu条
+      operationId: MenuController.删除menu条
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /opinion/:
+    get:
+      tags:
+      - opinion
+      description: 获取所有的意见
+      operationId: OpinionController.获取所有的意见
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Opinion'
+        "403":
+          description: ""
+    post:
+      tags:
+      - opinion
+      description: 添加意见
+      operationId: OpinionController.添加意见
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Opinion content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Opinion'
+      responses:
+        "201":
+          description: '{int} models.Opinion'
+        "403":
+          description: body is empty
+  /opinion/{id}:
+    put:
+      tags:
+      - opinion
+      description: 更新意见
+      operationId: OpinionController.更新意见
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Opinion content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Opinion'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Opinion'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - opinion
+      description: 删除意见
+      operationId: OpinionController.删除意见
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /upload/upload:
+    post:
+      tags:
+      - upload
+      description: 接收上传的文件并返回资源URL
+      operationId: UploadController.上传文件
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: formData
+        name: file
+        description: 要上传的文件
+        type: file
+      - in: formData
+        name: fileurl
+        description: 要上传的文件的URL
+        type: string
+      responses:
+        "-1":
+          description: '...'
+        "0":
+          description: '...'
+  /users/{id}:
+    get:
+      tags:
+      - users
+      description: 获取前台用户的详细信息
+      operationId: UsersController.获取前台用户的详细信息
+      parameters:
+      - in: path
+        name: id
+        description: 用户ID
+        required: true
+        type: string
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      responses:
+        "-1":
+          description: '...'
+        "0":
+          description: '...'
+    put:
+      tags:
+      - users
+      description: 用户注册，在登录失败的时候后台数据库已经记录该用户，注册实际上是填写该用户的详细信息
+      operationId: UsersController.更新会员资料
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: path
+        name: id
+        description: ID
+        required: true
+        type: string
+      - in: formData
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: formData
+        name: icon
+        description: 头像
+        required: true
+        type: string
+      - in: formData
+        name: user_name
+        description: 用户名
+        required: true
+        type: string
+      - in: formData
+        name: age
+        description: 年龄
+        required: true
+        type: string
+      - in: formData
+        name: sex
+        description: 性别
+        required: true
+        type: string
+      - in: formData
+        name: address
+        description: 现地址
+        required: true
+        type: string
+      - in: formData
+        name: phoneNum
+        description: 手机号
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Users'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - users
+      description: 删除用户
+      operationId: UsersController.删除用户
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /users/login:
+    post:
+      tags:
+      - users
+      description: 若登录成功则返回用户详细信息，失败则返回用户的session_key，方便前端与微信交换用户详细信息
+      operationId: UsersController.前台会员登录
+      parameters:
+      - in: formData
+        name: user_code
+        description: 微信提供的用户身份代码
+        required: true
+        type: string
+      responses:
+        "-1":
+          description: '...'
+        "0":
+          description: '...'
+  /users/session_key:
+    post:
+      tags:
+      - users
+      description: 获取用户在微信中的Session_key，用以执行兑换用户手机号等操作
+      operationId: UsersController.获取用户在微信中的Session_key
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: formData
+        name: user_code
+        description: 用户的code
+        required: true
+        type: string
+      responses:
+        "-1":
+          description: '...'
+        "0":
+          description: '...'
+  /users/signup:
+    post:
+      tags:
+      - users
+      description: 用户注册，在登录失败的时候后台数据库已经记录该用户，注册实际上是填写该用户的详细信息
+      operationId: UsersController.前台用户注册
+      parameters:
+      - in: query
+        name: token
+        description: 令牌
+        required: true
+        type: string
+      - in: formData
+        name: user_name
+        description: 用户名
+        required: true
+        type: string
+      - in: formData
+        name: telephone
+        description: 电话
+        required: true
+        type: string
+      - in: formData
+        name: address
+        description: 地址
+        required: true
+        type: string
+      - in: formData
+        name: gender
+        description: 0 未知 1 男 2 女
+        required: true
+        type: string
+      - in: formData
+        name: portrait
+        description: 头像
+        required: true
+        type: string
+      responses:
+        "-1":
+          description: '...'
+        "0":
+          description: '...'
+definitions:
+  lib.Time:
+    title: Time
+    type: object
+  models.Admin:
+    title: Admin
+    type: object
+    properties:
+      Id:
+        type: integer
+        format: int64
+      Openid:
+        type: string
+      Portrait:
+        type: string
+      Telephone:
+        type: string
+      UserName:
+        type: string
+  models.Banner:
+    title: Banner
+    type: object
+    properties:
+      Id:
+        description: banner的ID
+        type: integer
+        format: int64
+      ImgUrls:
+        description: banner的URL
+        type: string
+      Type:
+        description: 超链接的类型
+        type: string
+      Url:
+        description: banner对应的超链接
+        type: string
+  models.Community:
+    title: Community
+    type: object
+    properties:
+      ClassifyId:
+        type: integer
+        format: int64
+      Content:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      See:
+        type: integer
+        format: int64
+      Time:
+        $ref: '#/definitions/lib.Time'
+      UserId:
+        type: integer
+        format: int64
+  models.CommunityClass:
+    title: CommunityClass
+    type: object
+    properties:
+      ClassName:
+        type: string
+      Color:
+        type: string
+      Id:
+        type: integer
+        format: int64
+  models.CommunityClassSub:
+    title: CommunityClassSub
+    type: object
+    properties:
+      Father:
+        type: integer
+        format: int64
+      Icon:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      Title:
+        type: string
+  models.CommunityReply:
+    title: CommunityReply
+    type: object
+    properties:
+      Cid:
+        type: integer
+        format: int64
+      Content:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      Time:
+        $ref: '#/definitions/lib.Time'
+      UserId:
+        type: integer
+        format: int64
+  models.Expert:
+    title: Expert
+    type: object
+    properties:
+      Address:
+        type: string
+      ClassifyId:
+        type: integer
+        format: int64
+      Gender:
+        type: string
+      Icon:
+        type: string
+      Id:
+        description: 专家的ID
+        type: integer
+        format: int64
+      Info:
+        type: string
+      Name:
+        type: string
+      Openid:
+        type: string
+      PhoneNum:
+        type: string
+      Photo:
+        type: string
+      WorkAge:
+        type: string
+  models.ExpertAuth:
+    title: ExpertAuth
+    type: object
+    properties:
+      Address:
+        description: 地址
+        type: string
+      Age:
+        description: 从业年龄
+        type: string
+      ClassifyId:
+        description: 专家所属分类ID
+        type: integer
+        format: int64
+      Id:
+        description: 认证的ID
+        type: integer
+        format: int64
+      IdcardB:
+        description: 身份证反面url
+        type: string
+      IdcardF:
+        description: 身份证正面url
+        type: string
+      Info:
+        description: 专家简介
+        type: string
+      Name:
+        description: 专家姓名
+        type: string
+      Openid:
+        description: 用户的openid
+        type: string
+      PhoneNum:
+        description: 手机号码
+        type: string
+      Photo:
+        description: 专家本人头像url
+        type: string
+      Reject:
+        description: 申请被驳回的原因
+        type: string
+      Status:
+        description: 是否通过认证
+        type: integer
+        format: int64
+      Time:
+        $ref: '#/definitions/lib.Time'
+        description: 提交时间
+      UserId:
+        description: 用户id
+        type: integer
+        format: int64
+  models.ExpertClass:
+    title: ExpertClass
+    type: object
+    properties:
+      ClassName:
+        type: string
+      Id:
+        type: integer
+        format: int64
+  models.Info:
+    title: Info
+    type: object
+    properties:
+      AuthorType:
+        type: integer
+        format: int64
+      ClassifyId:
+        description: 所属的分类的ID
+        type: integer
+        format: int64
+      Content:
+        description: 内容
+        type: string
+      Icon:
+        description: 缩略图
+        type: string
+      Id:
+        type: integer
+        format: int64
+      Time:
+        $ref: '#/definitions/lib.Time'
+      Title:
+        description: 标题
+        type: string
+      Uid:
+        description: 作者
+        type: integer
+        format: int64
+  models.InfoClass:
+    title: InfoClass
+    type: object
+    properties:
+      ClassName:
+        type: string
+      Id:
+        type: integer
+        format: int64
+  models.Menu:
+    title: Menu
+    type: object
+    properties:
+      Id:
+        description: menu的ID
+        type: integer
+        format: int64
+      ImgUrls:
+        description: menu的URL
+        type: string
+      Title:
+        description: 标题
+        type: string
+      Type:
+        description: 超链接的类型
+        type: string
+      Url:
+        description: menu对应的超链接
+        type: string
+  models.Opinion:
+    title: Opinion
+    type: object
+    properties:
+      Content:
+        description: 反馈的内容
+        type: string
+      Id:
+        description: opinion的ID
+        type: integer
+        format: int64
+      Telephone:
+        description: 提交者的联系方式
+        type: string
+      UserId:
+        description: 提交反馈的用户的ID
+        type: integer
+        format: int64
+  models.Users:
+    title: Users
+    type: object
+    properties:
+      Address:
+        description: 用户的地址
+        type: string
+      Gender:
+        description: 性别：1代表男，2代表女，0未知
+        type: string
+      Id:
+        description: 用户ID
+        type: integer
+        format: int64
+      IsSuper:
+        description: 是否是特殊用户
+        type: string
+      Openid:
+        description: 用户的openid
+        type: string
+      Portrait:
+        description: 头像的URL
+        type: string
+      Telephone:
+        description: 联系电话
+        type: string
+      UserName:
+        description: 用户名
+        type: string
+      Year:
+        description: 年龄
+        type: string
+tags:
+- name: admin
+  description: |
+    AdminController operations for Admin
+- name: banner
+  description: |
+    BannerController operations for Banner
+- name: community
+  description: |
+    CommunityController operations for Community
+- name: community_class
+  description: |
+    CommunityClassController operations for CommunityClass
+- name: community_class_sub
+  description: |
+    CommunityClassSubController operations for CommunityClassSub
+- name: community_reply
+  description: |
+    CommunityReplyController operations for CommunityReply
+- name: expert
+  description: |
+    ExpertController operations for Expert
+- name: expert_class
+  description: |
+    ExpertClassController operations for ExpertClass
+- name: expert_auth
+  description: |
+    ExpertAuthController operations for ExpertAuth
+- name: info
+  description: |
+    InfoController operations for Info
+- name: info_class
+  description: |
+    InfoClassController operations for InfoClass
+- name: users
+  description: |
+    UsersController operations for Users
+- name: upload
+  description: |
+    UsersController operations for Users
+- name: menu
+  description: |
+    MenuController operations for Menu
+- name: opinion
+  description: |
+    OpinionController operations for Opinion

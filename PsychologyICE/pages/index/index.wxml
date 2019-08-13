@@ -1,0 +1,79 @@
+<view class="{{!info_list.length||info_list=='ErrorNetwork'?'page':''}}">
+    <view class="bg-white text-black a-fixed shadow" id="nav">
+        <!-- 标题 -->
+        <view class='cu-bar text-black' bind:tap="doubleClick" style="width:100%;height:{{CustomBar}}px;padding:{{StatusBar}}px 0 0 5px;">
+            <view class="text-cut text-center top" style="width:100%;">
+                {{indexTitle}}
+                <view catch:tap="toUser" data-target="viewModal" class="icon-myfill padding-left-xs" style="font-size:35rpx" />
+            </view>
+        </view>
+        <!-- 分类tab -->
+        <scroll-view scroll-x class="nav" style="height:90rpx" scroll-with-animation scroll-left="{{scrollLeft}}">
+            <view class="cu-item {{index==TabCur?'text-blue cur':''}}" wx:for="{{informationClass}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+                {{item.ClassName}}
+            </view>
+        </scroll-view>
+    </view>
+    <!-- 资讯列表 -->
+    <view class="bg-white list" style="flex:1;padding-top:{{contenHeight}}px" wx:for="{{informationClass}}" wx:for-item="items" wx:for-index="indexs" wx:if="{{TabCur==indexs}}">
+        <wux-refresher id="refresher-{{indexs}}" bind:pulling="onPulling" bind:refresh="onRefresh" distance="50" data-index="{{indexs}}">
+            <block wx:if="{{items.info_list=='ErrorNetwork'}}">
+                <view class="ErrorNetwork">
+                    <image src="/images/ErrorNetwork.png" mode="widthFix" style='width:60%' />
+                    <view class="text-bold text-gray" style="letter-spacing:6rpx;line-height:50rpx;font-size:26rpx">
+                        网络错误
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{!items.info_list&&items.info_list!='ErrorNetwork'}}">
+                <view class="ErrorNetwork">
+                    <image src="/images/NotAvailable.png" mode="widthFix" style='width:60%' />
+                    <view class="text-bold text-gray" style="letter-spacing:6rpx;line-height:50rpx;font-size:26rpx">
+                        暂无资讯
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{items.info_list.length&&items.info_list!='ErrorNetwork'}}">
+                <view class="cu-card no-card article">
+                    <navigator wx:for="{{items.info_list}}" bind:longpress="Menu" data-item='{{item}}' class="cu-item solid-bottom" url='../info/index?id={{item.Id}}&img={{item.Icon}}'>
+                        <view class="title">{{item.Title}}</view>
+                        <view class="content">
+                            <image src="{{item.Icon}}" mode="aspectFill"></image>
+                            <view class="desc">
+                                <view class='text-content'>{{item.Content}}</view>
+                                <view>
+                                    <view class='cu-tag bg-red light sm round'>{{item.Time}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+                <view wx:if="{{items.info_list.length>3}}" class="cu-load padding-bottom-xs {{items.moreStatus}}"></view>
+            </block>
+        </wux-refresher>
+    </view>
+    <view class='division'></view>
+</view>
+<!-- 悬浮按钮 -->
+<navigator url="../release/index" hover-class="" class="floatBtn bg-blue shadow text-xxl">
+    <view class="icon-add"></view>
+</navigator>
+<!-- Menu -->
+<view class="cu-modal {{ModalShow?'show':''}}" bindtap='Menu'>
+    <view class="cu-dialog" catchtap>
+        <view class="block">
+            <view class='cu-list menu text-center'>
+                <view class='cu-item' catch:tap="delete">
+                    <label class='flex justify-between align-center flex-sub'>
+                        <view class='flex-sub'>删除</view>
+                    </label>
+                </view>
+                <view class='cu-item' catch:tap="modify">
+                    <label class='flex justify-between align-center flex-sub'>
+                        <view class='flex-sub'>修改</view>
+                    </label>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

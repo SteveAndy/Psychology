@@ -1,0 +1,142 @@
+<!-- 顶部 -->
+<view class="a-fixed">
+    <view class="bg-img bg-gradual-blue shadow-blur flex align-center" id="top" style="height:400rpx">
+        <view class='padding-xl text-white'>
+            <view class='padding-xs text-xl padding-bottom-sm'>申请成为专家</view>
+            <view class='padding-xs'>Apply To Become An Expert</view>
+        </view>
+    </view>
+</view>
+<!-- 表单主体 -->
+<view style="padding-top:{{ViewHeight}}px">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <!-- 登录码 -->
+        <view class="cu-form-group margin-top">
+            <view class="title">登录码</view>
+            <input placeholder="请填写登录码" name="code" maxlength="4" />
+            <view class="cu-capsule radius" bind:tap="getCode">
+                <view class="cu-tag bg-red">
+                    <text class="icon-info" />
+                </view>
+                <view class="cu-tag line-red">获取登录码</view>
+            </view>
+        </view>
+        <!-- 真实姓名 -->
+        <view class="cu-form-group">
+            <view class="title">姓名</view>
+            <input placeholder="请填写真实姓名" name="name" maxlength="4" />
+        </view>
+        <!-- 身份证号 -->
+        <view class="cu-form-group">
+            <view class="title">身份证号</view>
+            <input placeholder="请填写真实身份证号" maxlength="18" name='idCard' />
+        </view>
+        <!-- 从业年龄 -->
+        <view class="cu-form-group">
+            <view class="title">从业年龄</view>
+            <input placeholder="请填写真实从业年龄" maxlength="2" name='workAge' />
+        </view>
+        <!-- 联系电话 -->
+        <view class="cu-form-group">
+            <view class="title">联系电话</view>
+            <input placeholder="请填写您的联系电话" maxlength="11" name='phoneNum' />
+            <view class="cu-capsule radius">
+                <view class="cu-tag bg-blue">+86</view>
+                <view class="cu-tag line-blue">中国大陆</view>
+            </view>
+        </view>
+        <!-- 所属领域 -->
+        <view class="cu-form-group">
+            <view class="title">所属领域</view>
+            <picker name='field' mode="multiSelector" bindchange="Change" bindcolumnchange="ColumnChange" value="{{dataIndex}}" range="{{dataArray}}">
+                <view class="picker text-blue">
+                    {{dataArray[0][dataIndex[0]]}}--{{dataArray[1][dataIndex[1]]}}
+                </view>
+            </picker>
+        </view>
+        <view class="cu-form-group">
+            <view class="title">地址选择</view>
+            <picker mode="region" bindchange="RegionChange" name='address' value="{{region}}" custom-item="{{customItem}}">
+                <view class="picker text-blue">
+                    {{!region.length?'请选择所在地':region[0]+'，'+region[1]+'，'+region[2]}}
+                </view>
+            </picker>
+        </view>
+        <view class="cu-form-group top">
+            <view class="title">个人简介</view>
+            <textarea name='introduction' placeholder="请输入您的个人简介，不得少于10个字" maxlength="-1"></textarea>
+        </view>
+        <!-- 本人头像 -->
+        <view class="cu-bar bg-white margin-top">
+            <view class="action">本人头像</view>
+            <view class="action">{{photo.length}}/1</view>
+        </view>
+        <view class="cu-form-group">
+            <view class="grid col-4 grid-square flex-sub">
+                <view class="padding-xs bg-img" style="background-image:url({{photo[0]}})" bindtap="ViewImage" data-type='photo' data-url="{{photo[0]}}" wx:if="{{photo.length}}">
+                    <view class="cu-tag bg-red" catchtap="DelImg" data-type="photo">
+                        <text class="icon-close"></text>
+                    </view>
+                </view>
+                <view wx:else class="padding-xs solids" bindtap="ChooseImage" data-type='photo'>
+                    <text class="icon-cameraadd"></text>
+                </view>
+            </view>
+        </view>
+        <!-- 身份证正/反面 -->
+        <view class="cu-bar bg-white" style="border-top: 1rpx solid #eee;">
+            <view class="action">身份证正/反面</view>
+            <view class="action">{{imgList.length}}/2</view>
+        </view>
+        <view class="cu-form-group">
+            <view class="grid col-4 grid-square flex-sub">
+                <view class="padding-xs bg-img" style="background-image:url({{imgList[index]}})" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
+                    <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+                        <text class="icon-close"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" bindtap="ChooseImage" wx:if="{{imgList.length<2}}">
+                    <text class="icon-cameraadd"></text>
+                </view>
+            </view>
+        </view>
+        <!-- 提交按钮 -->
+        <view class="cu-bar margin-top btn-group" style='bottom:15rpx;width:100%'>
+            <button bindtap='updataUserInfo' form-type="submit" class='cu-btn bg-blue shadow-blur round'>
+                提交申请
+            </button>
+        </view>
+    </form>
+</view>
+<!-- dialog提示框 -->
+<view class="cu-modal {{show?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">如何获取登录码</view>
+            <view class="action" bindtap="getCode">
+                <text class="icon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl">
+            <view class="DialogTitle text-df">什么是登录码:</view>
+            <view class="DialogContent text-grey padding-tb text-sm">
+                登录码是用来验证当前申请的用户是否属于本小程序在册用户，由系统生成，具有唯一性，并且不可更改。
+            </view>
+            <view class="DialogTitle text-df">如何获取登录码:</view>
+            <view class="DialogContent text-grey padding-top text-sm">
+                登录码需要在
+                <text class="text-red">宁夏心理咨询</text>
+                小程序中获取，点击下方
+                <text class="text-blue">立即获取</text>
+                按钮，跳转允许跳转小程序，进入小程序首页后，点击底部导航
+                <text class="text-blue">我的</text>
+                --
+                <text class="text-blue">我的登录码</text>
+                弹出对话框，即可查看到登录码
+            </view>
+        </view>
+        <view class="cu-bar bg-white" bindtap="ToMinProgram">
+            <view class="action flex-sub solid-left text-blue">立即获取</view>
+        </view>
+    </view>
+</view>

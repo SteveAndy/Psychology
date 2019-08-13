@@ -1,0 +1,37 @@
+<view class="bg-img bg-blue shadow-blur a-fixed" id="top">
+    <view class='cu-bar text-white' style="justify-content:left !important;height:{{CustomBar}}px;background-color:transparent">
+        <navigator id="toback" class='action' open-type="navigateBack" delta="1" hover-class="none" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+            <text class='icon-back'></text>
+            返回
+        </navigator>
+        <view class='action' style="height:{{CustomBar}}px;padding:{{StatusBar}}px 0 0 5px;font-size:30rpx;">
+            <text class="text-center" style='padding-left:{{titleMarginLeft}}px;width:{{titleWidth}}px;'>
+                {{indexTitle}}
+            </text>
+        </view>
+    </view>
+    <view class='padding-xl text-white'>
+        <view class='padding-xs text-xl padding-bottom-sm'>意见反馈</view>
+        <view class='padding-xs'>Personal Information</view>
+    </view>
+</view>
+<view class="cu-bar bg-white" style="padding-top:{{TopHeight+15}}px">
+    <view class="action">
+        <text class="icon-title text-blue"></text>
+        <view class="title">QQ/微信</view>
+        <input class="padding-left" placeholder="请输入您的QQ/微信"bindinput="Input" data-type='0'/>
+    </view>
+</view>
+<view class="cu-bar bg-white margin-top">
+    <view class="action">
+        <text class="icon-title text-blue"></text>
+        <text>反馈内容</text>
+    </view>
+</view>
+<view class="cu-form-group margin-xs solids">
+    <textarea auto-height placeholder="请输入您的宝贵意见" maxlength="-1" style="min-height:500rpx" bindinput="Input" data-type='1'/>
+</view>
+<!-- 提交保存 -->
+<view class="cu-bar btn-group padding-top" style='padding-bottom:15rpx;width:100%'>
+    <button bindtap='postFB' class='cu-btn bg-blue shadow-blur round'>提交</button>
+</view>

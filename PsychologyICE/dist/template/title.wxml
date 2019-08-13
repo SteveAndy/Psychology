@@ -1,0 +1,7 @@
+<template name="title">
+<view class="cu-custom shadow" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-white" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;justify-content: center;padding-right:0">
+        <text class="text-cut text-center text-black" style="width:{{titleWidth}}px">{{indexTitle}}</text>
+    </view>
+</view>
+</template>

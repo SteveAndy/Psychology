@@ -1,0 +1,74 @@
+.page{
+	display: flex;
+	flex-direction: column;
+}
+
+.top{
+	font-size:30rpx;
+	display: flex;
+	height: 100%;
+	justify-content:center;
+	align-items:center;
+	position: relative;
+	z-index: 1;
+}
+.top view{
+	position: absolute;
+	z-index: 2;
+	left: 10rpx;
+}
+
+.list{
+	display: flex;
+	flex-direction: column;
+	height:100%;
+}
+
+.ErrorNetwork{
+	height: 980rpx;
+	flex: 1;
+}
+
+.animation-fades {
+    animation-name: fades;
+    animation-duration: .8s;
+    animation-timing-function: linear
+}
+
+.animation-fade {
+    animation-name: fade;
+    animation-duration: .8s;
+    animation-timing-function: linear
+}
+
+@keyframes fades {
+    0% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0
+    }
+}
+
+.floatBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 130rpx;
+    right: 50rpx;
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 950rpx;
+}

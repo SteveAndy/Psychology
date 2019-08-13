@@ -1,0 +1,61 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/user/editInfo",
+    "pages/user/user",
+    "pages/user/auth",
+    "pages/user/apply_expert/index",
+    "pages/user/apply_expert/details",
+    "pages/forum/forum",
+    "pages/forum/special",
+    "pages/forum/info/index",
+    "pages/release/index",
+    "pages/chat/chat",
+    "pages/chat/chatUI/index",
+    "pages/info/index",
+    "pages/webview/webview",
+    "pages/feedback/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "宁夏心理咨询",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "requiredBackgroundModes": [
+    "audio"
+  ],
+  "navigateToMiniProgramAppIdList": [
+    "wx737c3211676c7ff5"
+  ],
+  "tabBar": {
+    "custom": true,
+    "color": "#47505b",
+    "selectedColor": "#00d853",
+    "backgroundColor": "#FFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "iconPath": "images/tabBar/zixun.png",
+        "selectedIconPath": "images/tabBar/zixun_i.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "images/tabBar/wenda.png",
+        "selectedIconPath": "images/tabBar/wenda_i.png",
+        "pagePath": "pages/forum/forum",
+        "text": "问答"
+      },
+      {
+        "iconPath": "images/tabBar/message.png",
+        "selectedIconPath": "images/tabBar/message_i.png",
+        "pagePath": "pages/chat/chat",
+        "text": "消息"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}
