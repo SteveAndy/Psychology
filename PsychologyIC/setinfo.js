@@ -6,7 +6,7 @@ const md5 = require('utils/md5.min.js'),
     RootUrl = '服务器地址',
   MiniProgramAppid = 'appid',//跳转小程序appid
     //IM用户配置
-    UserCode = 'u',//前缀+id
+    UserCode = 'u',//前缀+user_id
     UserPwd = '123456';
 function signature() {
     return md5("appkey=" + JgAppkey
