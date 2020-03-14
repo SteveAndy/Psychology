@@ -1,3 +1,5 @@
+# 此项目不在维护，如果需要商用项目请移步[律师、心理咨询小程序](https://s.w7.cc/module-22958.html)
+
 # 心理咨询类小程序
 
 > ## 简介
@@ -26,6 +28,7 @@
   
   
 ###### &nbsp;&nbsp;&nbsp;&nbsp;IM使用的是极光IM，还有很多功能，大家可以去看一看 [戳这里](https://www.jiguang.cn/)
+![1.jpg][1]
   
   
 > ## 后端
@@ -49,3 +52,4 @@
 ###### &nbsp;&nbsp;&nbsp;&nbsp;希望大家如果觉得可以帮助你，请不要直接拿来用，好歹改改UI(防止撞脸0.0)，有问题请直接提交lssues或者联系我QQ：1403697854 或者加微信：LoveEmpathy
 
 ###### &nbsp;&nbsp;&nbsp;&nbsp;小白一枚，大佬们绕道或者-----轻点喷！
+  [1]: https://cdn.w7.cc/images/2020/02/23/5h8fcwBPeu8fvUzejIB9Fl2RERwvskTxLQXHWg8H.png
